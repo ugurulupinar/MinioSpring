@@ -37,4 +37,6 @@ public class FileDto implements Serializable {
 
     private String filename;
 
+    private String uuid;
+    
 }

@@ -14,6 +14,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static org.springframework.web.servlet.HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE;
 
@@ -26,13 +27,13 @@ public class FileController {
     private MinioService minioService;
 
     @GetMapping
-    public ResponseEntity<Object> getFiles() {
+    public ResponseEntity<Object> getFiles() throws SQLException {
         return ResponseEntity.ok(minioService.getListObjects());
     }
 
    
     @PostMapping(value = "/upload")
-    public ResponseEntity<Object> upload(@ModelAttribute FileDto request) {
+    public ResponseEntity<Object> upload(@ModelAttribute FileDto request) throws SQLException {
         return ResponseEntity.ok().body(minioService.uploadFile(request));
     }
 
